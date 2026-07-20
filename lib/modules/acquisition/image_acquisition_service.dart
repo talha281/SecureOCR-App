@@ -28,7 +28,6 @@ class ImageAcquisitionService {
     try {
       final xFile = await _picker.pickImage(
         source: picker.ImageSource.camera,
-        imageQuality: 95, // High quality for OCR accuracy
         preferredCameraDevice: picker.CameraDevice.rear,
       );
 
@@ -54,7 +53,6 @@ class ImageAcquisitionService {
     try {
       final xFile = await _picker.pickImage(
         source: picker.ImageSource.gallery,
-        imageQuality: 95,
       );
 
       if (xFile == null) return AcquisitionResult.cancelled();

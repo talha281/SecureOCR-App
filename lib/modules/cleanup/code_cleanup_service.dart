@@ -36,8 +36,8 @@ class CodeCleanupService {
     final lowConfidenceLines = <int>[];
 
     // Regex patterns for line numbers & IDE gutter artifacts
-    // Matches "1  ", " 12 | ", " 100: ", "10 -> "
-    final lineNumberRegex = RegExp(r'^\s*\d{1,4}\s*[:\|\-\>\.]?\s+');
+    // Matches "1  ", " 12 | ", " 100: ", "10 -> " (strictly line numbers with gutter padding/separators)
+    final lineNumberRegex = RegExp(r'^\s*\d{1,4}\s+[:\|│\-\>]\s+|^\s*\d{1,4}\s{2,}(?=[a-zA-Z_/\\#<\{\[\$])');
     // Matches gutter noise characters like "• ", "· ", "► ", "v "
     final gutterNoiseRegex = RegExp(r'^\s*[•·►v>]\s*');
 
