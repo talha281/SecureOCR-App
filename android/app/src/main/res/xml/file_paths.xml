@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- MOD-02: Allow FileProvider to share temp camera captures from cache dir -->
+    <cache-path name="camera_images" path="." />
+    <!-- MOD-09: Session temp files -->
+    <cache-path name="session_temp" path="sco_session" />
+</paths>
