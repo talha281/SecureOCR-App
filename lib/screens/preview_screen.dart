@@ -248,8 +248,8 @@ class _PreviewScreenState extends ConsumerState<PreviewScreen>
 
   Widget _buildToolBar(EnhancementState enhState) {
     return Container(
-      height: 72,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      height: 64,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       decoration: const BoxDecoration(
         color: AppColors.surfaceDark,
         border: Border(top: BorderSide(color: AppColors.borderDark)),

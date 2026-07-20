@@ -65,23 +65,27 @@ class _EditorScreenState extends ConsumerState<EditorScreen> {
               color: AppColors.textPrimaryDark, size: 20),
           onPressed: () => context.go(AppRoutes.home),
         ),
-        title: Row(
-          children: [
-            const Text(
-              'Code Editor',
-              style: TextStyle(
-                color: AppColors.textPrimaryDark,
-                fontSize: 17,
-                fontWeight: FontWeight.w600,
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Code Editor',
+                style: TextStyle(
+                  color: AppColors.textPrimaryDark,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            const SizedBox(width: 10),
-            // MOD-05 Language & Framework badge
-            _LanguageChip(
-              label: detection?.displayName ?? 'Plain Text',
-              confidencePct: ((detection?.confidence ?? 0.0) * 100).round(),
-            ),
-          ],
+              const SizedBox(width: 8),
+              // MOD-05 Language & Framework badge
+              _LanguageChip(
+                label: detection?.displayName ?? 'Plain Text',
+                confidencePct: ((detection?.confidence ?? 0.0) * 100).round(),
+              ),
+            ],
+          ),
         ),
         actions: [
           // MOD-08 Share Action
