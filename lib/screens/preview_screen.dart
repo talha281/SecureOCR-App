@@ -24,6 +24,7 @@ class _PreviewScreenState extends ConsumerState<PreviewScreen>
   _ActiveTool _activeTool = _ActiveTool.none;
   late AnimationController _panelController;
   late Animation<double> _panelSlide;
+  Size? _imageSize;
 
   @override
   void initState() {
@@ -36,6 +37,26 @@ class _PreviewScreenState extends ConsumerState<PreviewScreen>
       parent: _panelController,
       curve: Curves.easeOutCubic,
     );
+    WidgetsBinding.instance.addPostFrameCallback((_) => _loadImageSize());
+  }
+
+  void _loadImageSize() {
+    final imagePath = ref.read(imageAcquisitionProvider).imagePath;
+    if (imagePath != null && File(imagePath).existsSync()) {
+      final image = Image.file(File(imagePath));
+      image.image.resolve(const ImageConfiguration()).addListener(
+        ImageStreamListener((info, _) {
+          if (mounted) {
+            setState(() {
+              _imageSize = Size(
+                info.image.width.toDouble(),
+                info.image.height.toDouble(),
+              );
+            });
+          }
+        }),
+      );
+    }
   }
 
   @override
@@ -218,6 +239,7 @@ class _PreviewScreenState extends ConsumerState<PreviewScreen>
               CropOverlay(
                 key: const Key('crop_overlay'),
                 initialCrop: enhState.cropRect,
+                imageSize: _imageSize,
                 onCropChanged: (rect) =>
                     ref.read(enhancementProvider.notifier).setCrop(rect),
               ),

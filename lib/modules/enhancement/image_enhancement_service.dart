@@ -57,10 +57,10 @@ class ImageEnhancementService {
 
     // 2. Crop first (before rotate, so handles are on un-rotated image)
     if (crop != null && crop.isValid) {
-      final x = (crop.left * image.width).round();
-      final y = (crop.top * image.height).round();
-      final w = ((crop.right - crop.left) * image.width).round();
-      final h = ((crop.bottom - crop.top) * image.height).round();
+      final x = (crop.left * image.width).round().clamp(0, image.width - 1);
+      final y = (crop.top * image.height).round().clamp(0, image.height - 1);
+      final w = ((crop.right - crop.left) * image.width).round().clamp(1, image.width - x);
+      final h = ((crop.bottom - crop.top) * image.height).round().clamp(1, image.height - y);
       image = img.copyCrop(image, x: x, y: y, width: w, height: h);
     }
 
